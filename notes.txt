@@ -1,0 +1,107 @@
+
+Two types of LLM's:
+
+1. Base LLM's
+
+	Predicts next word based on text training data.
+
+	Since most LLM's are trained on the internet, i.e., HTML pages, the output of our prompts would typically be sentences which appear nearby to our prompts. Example:
+
+	prompt: What is the capital of France?
+	output: What is France's largest city?
+
+2. Instruction tuned LLM
+
+	Tries to follow instructions. Fine tune on instructions and good attempts at following those instructions.
+
+	prompt: What is the capital of France?
+	output: The capital of France is Paris
+
+	Outputs here will be: Helpful, Honest and Harmless (i.e. less toxic)
+
+	RLHF is used: Reinforcement learning with human feedback
+
+Principles of Prompting:
+
+	Principle 1: Write clear and specific instructions (clear doesn't mean short)
+
+	Principle 2: Give the model time to think
+
+Tactics for prompting (while you are programming LLM's):
+
+	- Avoiding Prompt Injection:
+
+		When you are accepting user's input and passing it along to the underlying model in your program, ensure you are securing your application against prompt injection attacks.
+
+	- Ask for structured output from the model (so that you can read the output into a program)
+
+	- Few-shot prompting: Give the model successful examples of doing some particular tasks. Then ask it to fill-in-the-blanks for a new task.
+
+	- Instruct the model to work out its own solution before rushing to a conclusion
+
+Prompt guidelines:
+
+	- Be clear and specific
+
+	- Analyze why result does not give desired output
+
+	- Refine the idea and the prompt
+
+	- Repeat (the process is iterative)
+
+Note: LLM's tend to be so-so at character counts as they rely on tokenizers
+
+We can also use LLM's for:
+- translating text from one language to another. And also from one format (XML) to another (JSON)
+- summarizations
+- inferring / analyzing the sentiment
+- expanding, i.e. coming with large pieces of text (example: write an email explaining why I need a leave)
+
+Temperature of a model:
+
+	Consider a piece of text "My favorite food is ...", based on the training data the model is trained on, the output can be: pizza (53% probability), sushi (30% probability), or tacos (5% probability).
+
+	The way we measure what the model outputs for the above prompt is called "Temperature". If temperature is set to 0, that means the model has reliability and predictability. As temperature increases, the model entertains more variety (the model becomes creative)
+
+API level details of OpenAI API:
+	
+	messages = [{"role": "user", "content": prompt}]
+
+	For most usecases, we use the above piece of text. However, if you want to change the behavior of the assistant, i.e., the chatgpt model, we pass the role as "system", think of it like someone which sets the behavior of the assitant by whispering in its ear. Example:
+
+	{'role':'system', 'content':'You are an assistant that speaks like Shakespeare.'}
+
+	or
+
+	{'role':'system', 'content':'You are friendly chatbot.'}
+
+	if you want to provide the model with extra information which it can use to act upon, you can use 'assistant' role (think of it like extra memory which is domain-specific)
+
+Context:
+
+	While interacting with the model, if you want chatbot-like experience you need to store previous messages in the list, and pass it to the model. Note that the list size will grow as the chat becomes more-and-more involved. We refer to this list as "Context".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
